@@ -1,0 +1,35 @@
+PROCESS OF MASQUERADE IN HTTP SERVICE
+WE NEED 3 MACHINES FOR MASQUERADE i.e IP FORWARDING{ SERVER,CLIENT1,CLIENT2}
+SERVER
+STEP 1> INSTALL,START AND ENABLE HTTPD SERVICE
+  #yum install httpd -y
+	#systemctl start httpd
+	#systemctl enable httpd
+STEP2> CREATE INDEX.HTML FILE AND WRITE ANYTHING IN HTML LANGUAGE
+  #vim /var/www/html/index.html
+	<h1> welcome </h1>
+STEP 3> FORWARD PORT TO IP OF CLIENT1
+  #firewall-cmd --add-forward-port=port=80:proto=tcp:toaddr=ip of client1
+STEP 3>ADD MASQUERADE IN FIREWALL
+  #firewall-cmd --add-masquerade
+CLIENT1
+STEP1> INSTALL,START AND ENABLE HTTPD SERVICE
+   #yum install httpd -y
+	 #systemctl start httpd
+	 #systemctl enable httpd
+STEP2>CREATE INDEX.HTML FILE AND WRITE ANYTHING IN HTML LANGUAGE
+   #vim /var/www/html/index.html
+	 <h1> happy </h1>\
+STEP3> CURL LOCAL HOST TO SEE WEBSITE IS HOSTED
+  #curl localhost
+STEP4> ADD MASQUERADE,HTTP SERVICE TO FIREWALL
+   #firewall-cmd --add-masquerade
+	 #firewall-cmd --add-service=http --permanent
+	 #firewall-cmd --reload
+	 #firewall-cmd --list-all
+	 
+CLIENT2
+STEP1> CURL IP OF SERVER AND IP OF CLIENT1
+   #curl ip of server
+	 o/p-hello
+	 

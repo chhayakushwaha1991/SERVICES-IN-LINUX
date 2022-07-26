@@ -1,0 +1,17 @@
+PROCESS TO HOST A WEBSITE
+STEP 1> INSTALL HTTP SERVICE
+      #yum install httpd -y
+STEP2>START AND ENABLE HTTPD
+      #systemctl start httpd
+      #systemctl enable httpd
+STEP 3> CHANGE DIRECTORY AND MOVE TO HTML DIRECTORY
+      #cd /var/www/html
+STEP 4> CREATE AN INDEX.HTML FILE ADD CONTENT IN IT
+      #vim index.html{file name will be always index.html}
+      WRITE- <h1> welcome to httpd </h1>
+STEP 5> ADD PORT FOR HTTP SERVICE
+      # firewall-cmd --add-port=80/tcp --permanent
+      #firewall-cmd --reload
+STEP 6>SEE WEBSITE IS CREATED 
+      #curl localhost/ip of machine
+STEP7> OPEN A BROWSER AND WRITE LOCALHOST U WILL SEE THE INDEX.HTML FILE CONTENT       

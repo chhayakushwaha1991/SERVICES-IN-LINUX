@@ -1,0 +1,30 @@
+PORT FOWARDING PROCESS IN HTTP
+WE WOULD NEED TWO MACHINE i.e SERVER AND CLIENT{PING BOTH THE MACHINE TO SEE THE CONNECTIVITY}
+SERVER
+STEP 1> INSTALL HTTP SERVICE AND START,ENABLE THE SERVICE
+  # yum install httpd -y
+  #systemctl start httpd
+  #systemctl enable httpd
+STEP 2> CREATE AN INDEX.HTML FILE AND WRITE ANYTHING IN HTML FORMAT
+  #cd /var/www/html
+  #vim index.html
+  <h1> welcome </h1>
+STEP 3>GO TO CONFIGURATION FILE OF HTTPD AND CHANGE PORT NO. FROM 80 TO 8080
+   #vim /etc/httpd/httpd.conf
+   line 42 -change 80 to 8080
+STEP 4> RESTART HTTPD SERVICE AFTER DOING CHANGES IN CONFIGURATION FILE
+   #systemctl restart httpd
+STEP 5> ADD PORT NO. TO FIREWALL
+    #firewall-cmd --remove-port=80/tcp{if 80 port is added before}
+    #firewall-cmd --add-port=8080/tcp
+    CLIENT
+ STEP 1> SEE THAT ABOVE WEBSITE IS RUNNING OR NOT
+     #curl ip of server:8080
+SERVER
+STEP 6> REMOVE THE PORT 8080 WHICH IS ADDED AND FORWARD PORT TO 8080
+    #firewall-cmd --remove-port=8080/tcp
+    #firewall -cmd --add-forward-port=port=80:proto=tcp:toport=8080 --permanent
+    #firewall-cmd --list-all{to see ports}
+CLIENT
+STEP 2> CURL IP OF SERVER 
+  #curl ip of server
